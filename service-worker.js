@@ -1,94 +1,96 @@
-// กำหนดชื่อ Cache
-const staticCacheName = 'juck-projects-static-v4';
-const dynamicCacheName = 'juck-projects-dynamic-v3';
+// sw-all-lao.js - Service Worker สำหรับแอปผลรางวัลลาวและรัฐบาล
+const CACHE_NAME = 'all-lao-lottery-v2';
+const DYNAMIC_CACHE = 'all-lao-lottery-dynamic-v2';
 
-// ไฟล์ที่ต้องการ cache
-const assets = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/styles.css',
-  '/script.js',
-  '/sw.js',
-  '/service-worker.js',
-  '/192.png',
-  '/512.png'
+// ไฟล์ที่ต้อง cache
+const STATIC_ASSETS = [
+  './',
+  './index.html',
+  './styles.css',
+  './script.js',
+  './manifest-all-lao.json',
+  './192.png',
+  './512.png',
+  'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
 ];
 
-// Install event
-self.addEventListener('install', evt => {
-  console.log('Service Worker: Installing');
-  evt.waitUntil(
-    caches.open(staticCacheName)
+// ติดตั้ง Service Worker
+self.addEventListener('install', event => {
+  console.log('Service Worker: Installing...');
+  event.waitUntil(
+    caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Caching shell assets');
-        return cache.addAll(assets);
+        console.log('Caching static assets');
+        return cache.addAll(STATIC_ASSETS);
       })
-      .catch(err => {
-        console.log('Cache addAll error:', err);
-      })
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
-// Activate event
-self.addEventListener('activate', evt => {
+// เปิดใช้งาน Service Worker
+self.addEventListener('activate', event => {
   console.log('Service Worker: Activated');
-  evt.waitUntil(
+  event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
         keys
-          .filter(key => key !== staticCacheName && key !== dynamicCacheName)
-          .map(key => caches.delete(key))
+          .filter(key => key !== CACHE_NAME && key !== DYNAMIC_CACHE)
+          .map(key => {
+            console.log('Deleting old cache:', key);
+            return caches.delete(key);
+          })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// Fetch event
-self.addEventListener('fetch', evt => {
-  // ข้ามการ cache สำหรับ external resources
-  if (evt.request.url.includes('cdnjs.cloudflare.com') || 
-      evt.request.url.includes('cdn.jsdelivr.net') ||
-      evt.request.url.includes('netlify.app') ||
-      evt.request.url.includes('github.io')) {
-    return fetch(evt.request);
+// จัดการการ fetch
+self.addEventListener('fetch', event => {
+  // ข้ามการ cache สำหรับ chrome-extension และ blob
+  if (event.request.url.startsWith('chrome-extension://') || 
+      event.request.url.startsWith('blob:')) {
+    return;
   }
 
-  evt.respondWith(
-    caches.match(evt.request)
-      .then(cacheRes => {
-        // ถ้าเจอใน cache ให้ส่งกลับ
-        if (cacheRes) {
-          return cacheRes;
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        // ถ้ามีใน cache ให้ส่งคืน
+        if (response) {
+          return response;
         }
-        
-        // ถ้าไม่เจอ ให้โหลดจาก network
-        return fetch(evt.request)
-          .then(fetchRes => {
-            // เก็บใน dynamic cache สำหรับครั้งต่อไป
-            return caches.open(dynamicCacheName)
-              .then(cache => {
-                // เก็บเฉพาะ successful responses และไม่ใช่ external resources
-                if (fetchRes.status === 200 && 
-                    !evt.request.url.includes('cdnjs.cloudflare.com') &&
-                    !evt.request.url.includes('cdn.jsdelivr.net') &&
-                    !evt.request.url.includes('netlify.app') &&
-                    !evt.request.url.includes('github.io')) {
-                  cache.put(evt.request.url, fetchRes.clone());
-                }
-                return fetchRes;
-              });
-          })
-          .catch(() => {
-            // Fallback สำหรับหน้า HTML
-            if (evt.request.destination === 'document') {
-              return caches.match('/index.html');
-            }
-            // Fallback สำหรับ asset files
-            return caches.match(evt.request);
-          });
+
+        // ถ้าไม่มีใน cache ให้ fetch จาก network
+        return fetch(event.request).then(fetchResponse => {
+          // ตรวจสอบว่า response ถูกต้องและเป็น GET request
+          if (!fetchResponse || fetchResponse.status !== 200 || fetchResponse.type !== 'basic' || 
+              event.request.method !== 'GET') {
+            return fetchResponse;
+          }
+
+          // Cache response ใหม่
+          const responseToCache = fetchResponse.clone();
+          caches.open(DYNAMIC_CACHE)
+            .then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+
+          return fetchResponse;
+        });
+      })
+      .catch(() => {
+        // Fallback สำหรับหน้า HTML
+        if (event.request.destination === 'document' || 
+            (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html'))) {
+          return caches.match('./index.html');
+        }
       })
   );
+});
+
+// รับข้อความจาก main thread
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
