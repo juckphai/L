@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เว็บลิงค์ของฉัน</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.5;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .link-item {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+        }
+        
+        .link-item:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .link-icon i {
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .link-content {
+            flex-grow: 1;
+            text-align: left;
+        }
+        
+        .link-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+        
+        .link-description {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .link-arrow {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.8rem;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .link-item {
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 400px) {
+            .container {
+                padding: 20px 15px;
+                border-radius: 16px;
+            }
+            
+            h1 {
+                font-size: 1.4rem;
+            }
+            
+            .description {
+                font-size: 0.85rem;
+            }
+            
+            .link-item {
+                padding: 12px 14px;
+            }
+            
+            .link-icon {
+                width: 36px;
+                height: 36px;
+                margin-right: 12px;
+            }
+            
+            .link-icon i {
+                font-size: 1.1rem;
+            }
+            
+            .link-title {
+                font-size: 0.95rem;
+            }
+            
+            .link-description {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-link"></i>
+        </div>
+        
+        <h1>เว็บลิงค์ของฉัน</h1>
+        <p class="description">คลิกที่ลิงค์เพื่อเปิดเว็บไซต์</p>
+        
+        <div class="links-list">
+            <a href="https://latest-number-translation.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">แปลเลข</div>
+                    <div class="link-description">แปลงตัวเลขเป็นภาษาไทย</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://result-lotto.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">กรอกผลหวย</div>
+                    <div class="link-description">ตรวจผลรางวัลล่าสุด</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://newest-account.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">บันชีประจำวัน</div>
+                    <div class="link-description">บันทึกรายรับรายจ่าย</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://activities-end.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">บันทึกกิจกรรม</div>
+                    <div class="link-description">จัดการตารางงาน</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://newest-acsale.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">งานขายสินค้า</div>
+                    <div class="link-description">จัดการรายการสินค้า</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://juckphai.github.io/juckphai/08.html" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">รวมลิงค์ผลลาว</div>
+                    <div class="link-description">ผลลอตเตอรี่ลาว</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://main-juck.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">รวมลิงค์เว็บ</div>
+                    <div class="link-description">ลิงค์สำคัญทั้งหมด</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>อำนวยความสะดวกในการเข้าถึงเว็บไซต์</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // เพิ่มเอฟเฟกต์เมื่อคลิกที่ลิงค์
+            const linkItems = document.querySelectorAll('.link-item');
+            linkItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // เพิ่มเอฟเฟกต์การกด
+                    this.style.transform = 'scale(0.98)';
+                    this.style.background = '#e9ecef';
+                    
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.style.background = '';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
