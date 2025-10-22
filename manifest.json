@@ -1,14 +1,14 @@
 {
-  "name": "ผลรางวัลกลุ่มลาวและรัฐบาล",
-  "short_name": "ผลรางวัลลาว-รัฐบาล",
-  "description": "แอปพลิเคชันสำหรับแสดงผลรางวัลลาวและรัฐบาลไทย พร้อมระบบบันทึกรูปภาพ",
-  "start_url": "./index.html",
-  "id": "./",
+  "name": "Juck's Project Links",
+  "short_name": "JuckProjects",
+  "description": "Collection of web projects and applications by Juck",
+  "start_url": "/",
+  "id": "/",
   "display": "standalone",
-  "background_color": "#fffde7",
-  "theme_color": "#f97316",
+  "background_color": "#1e40af",
+  "theme_color": "#1e40af",
   "orientation": "portrait",
-  "scope": "./",
+  "scope": "/",
   "categories": ["utilities", "productivity"],
   "launch_handler": {
     "client_mode": "focus-existing"
@@ -25,6 +25,22 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./screenshot1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Project Links Main Screen"
+    },
+    {
+      "src": "./screenshot2.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Project Categories"
     }
   ]
 }

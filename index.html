@@ -3,157 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ผลรางวัลกลุ่มลาวและรัฐบาล</title>
-    
-    <!-- PWA-related additions -->
-    <link rel="manifest" href="manifest-all-lao.json">
-    <meta name="theme-color" content="#FF9800"/>
-    <link rel="apple-touch-icon" href="192.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="ผลรางวัลกลุ่มลาว">
-    <!-- End of PWA-related additions -->
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
-    <!-- External CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <title>เว็บลิงค์ของฉัน</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.5;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .link-item {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+        }
+        
+        .link-item:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .link-icon i {
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .link-content {
+            flex-grow: 1;
+            text-align: left;
+        }
+        
+        .link-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+        
+        .link-description {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .link-arrow {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.8rem;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .link-item {
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 400px) {
+            .container {
+                padding: 20px 15px;
+                border-radius: 16px;
+            }
+            
+            h1 {
+                font-size: 1.4rem;
+            }
+            
+            .description {
+                font-size: 0.85rem;
+            }
+            
+            .link-item {
+                padding: 12px 14px;
+            }
+            
+            .link-icon {
+                width: 36px;
+                height: 36px;
+                margin-right: 12px;
+            }
+            
+            .link-icon i {
+                font-size: 1.1rem;
+            }
+            
+            .link-title {
+                font-size: 0.95rem;
+            }
+            
+            .link-description {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- เราได้ลบ SVG Filter ออกและใช้ CSS filter แทน -->
-
-    <h1>ผลรางวัลกลุ่มลาวและรัฐบาล</h1>
-
-    <div class="form-container">
-        <div class="form-group">
-            <label for="topicSelect">1. เลือกชนิดผลรางวัล</label>
-            <select id="topicSelect">
-                <!-- Options will be populated by JavaScript -->
-            </select>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-link"></i>
         </div>
-
-        <!-- ฟอร์มสำหรับหวยลาว (แสดงตามปกติ) -->
-        <div id="laoLotteryFormContent">
-            <div class="form-group">
-                <label for="dateInput">2. เลือกวันที่</label>
-                <input type="date" id="dateInput">
-            </div>
-            <div class="form-group">
-                <label for="numberInput">3. กรอกตัวเลข</label>
-                <input type="text" id="numberInput" placeholder="กรุณาเลือกชนิดผลรางวัลก่อน" pattern="\d*" inputmode="numeric" />
-            </div>
-            <div class="form-footer">
-                <button id="convertButton" class="convert-button">แจงรายละเอียด</button>
-            </div>
+        
+        <h1>เว็บลิงค์ของฉัน</h1>
+        <p class="description">คลิกที่ลิงค์เพื่อเปิดเว็บไซต์</p>
+        
+        <div class="links-list">
+            <a href="https://latest-number-translation.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">แปลเลข</div>
+                    <div class="link-description">แปลงตัวเลขเป็นภาษาไทย</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://result-lotto.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">กรอกผลหวย</div>
+                    <div class="link-description">ตรวจผลรางวัลล่าสุด</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://newest-account.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">บันชีประจำวัน</div>
+                    <div class="link-description">บันทึกรายรับรายจ่าย</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://activities-end.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">บันทึกกิจกรรม</div>
+                    <div class="link-description">จัดการตารางงาน</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://newest-acsale.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">งานขายสินค้า</div>
+                    <div class="link-description">จัดการรายการสินค้า</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://juckphai.github.io/juckphai/08.html" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">รวมลิงค์ผลลาว</div>
+                    <div class="link-description">ผลลอตเตอรี่ลาว</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <a href="https://main-juck.netlify.app/" class="link-item" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">รวมลิงค์เว็บ</div>
+                    <div class="link-description">ลิงค์สำคัญทั้งหมด</div>
+                </div>
+                <div class="link-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
         </div>
-
-        <!-- ฟอร์มสำหรับรัฐบาลไทย (ซ่อนไว้ก่อน) -->
-        <div id="thaiLotteryFormContent" class="thai-lottery-form">
-            <div class="form-group"><label for="draw-date">งวดวันที่ (วว/ดด/ปปปป)</label><div class="date-input-wrapper"><input type="text" id="draw-date" placeholder="วว/ดด/ปปปป (พ.ศ.)" /><button type="button" id="calendarButton">📅</button></div><input type="date" id="hiddenDateInput" style="display: none; visibility: hidden;"></div>
-            <div class="form-group"><label>เลขหน้า 3 ตัว</label><div class="input-pair"><input type="text" id="front-three-1" maxlength="3" placeholder="ชุดที่ 1"><input type="text" id="front-three-2" maxlength="3" placeholder="ชุดที่ 2"></div></div>
-            <div class="form-group"><label>เลขท้าย 3 ตัว</label><div class="input-pair"><input type="text" id="back-three-1" maxlength="3" placeholder="ชุดที่ 1"><input type="text" id="back-three-2" maxlength="3" placeholder="ชุดที่ 2"></div></div>
-            <div class="form-group"><label for="back-two">เลขท้าย 2 ตัว</label><input type="text" id="back-two" maxlength="2" placeholder="กรอกเลขท้าย 2 ตัว"></div>
-            <div class="form-group"><label for="first-prize">รางวัลที่ 1 (6 ตัว)</label><input type="text" id="first-prize" maxlength="6" placeholder="กรอกเลขรางวัลที่ 1"></div>
-            <div class="button-container"><button id="displayThaiResultsButton">แสดงผล</button></div>
+        
+        <div class="footer">
+            <p>อำนวยความสะดวกในการเข้าถึงเว็บไซต์</p>
         </div>
     </div>
 
-    <!-- Popup สำหรับผลลาว -->
-    <div id="popupOverlay" class="popup-overlay">
-        <div class="popup-content">
-            <div id="captureArea" class="popup-main-content">
-                <div style="position: relative; z-index: 1;">
-                    <div class="result-header">
-                        <div id="popupNameDisplay"></div>
-                    </div>
-                    <p id="popupTimeDisplay"></p>
-                    <p id="popupDateDisplay"></p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // เพิ่มเอฟเฟกต์เมื่อคลิกที่ลิงค์
+            const linkItems = document.querySelectorAll('.link-item');
+            linkItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // เพิ่มเอฟเฟกต์การกด
+                    this.style.transform = 'scale(0.98)';
+                    this.style.background = '#e9ecef';
                     
-                    <div style="margin-top: 15px;">
-                        <div id="popupPrizeTitle" class="prize-title"></div>
-                    </div>
-
-                    <div id="popupMainDigitsDisplay" class="ball-group"></div>
-                    <div class="numbers-display">
-                        <div class="number-group">
-                            <p class="prize-label-blue">3 ตัวบน</p>
-                            <div id="popupThreeDigitsDisplay" class="ball-group"></div>
-                        </div>
-                        <div class="number-group">
-                            <p class="prize-label-orange">2 ตัวล่าง</p>
-                            <div id="popupTwoDigitsDisplay" class="ball-group"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="popup-buttons-container">
-                <div class="popup-buttons">
-                    <button id="popupCircleButton" class="popup-button" onclick="toggleCirclePopup()">สี่เหลี่ยมล่าง</button>
-                    <button id="popupSquareButton" class="popup-button" onclick="toggleSquarePopup()">สี่เหลี่ยมสามตัวบน</button>
-                    <button id="popupCircleTopButton" class="popup-button" onclick="toggleSquareTopPopup()">สี่เหลี่ยมสองตัวบน</button>
-                </div>
-                <button id="saveLaoAsImageButton" class="popup-button" style="background-color: #007bff; max-width: 200px; width: 100%;">บันทึกเป็นรูปภาพ</button>
-                <button class="close-popup" onclick="closePopup()">ปิดหน้าต่างนี้</button>
-            </div>
-        </div>
-    </div>
-
-<!-- ส่วนของ popup รัฐบาลไทย -->
-<div id="thaiLotteryPopupOverlay" class="popup-overlay">
-    <div id="thaiLotteryPopupContent" class="popup-content">
-        <div class="result-display">
-            <div style="position: relative; text-align: center; font-size: 18px; line-height: 0.5;">
-                <div class="result-header">
-                    <div class="topic-box">
-                        <img src="logo.png" alt="Logo" class="header-logo">
-                        <span>ผลฉลากกินแบ่งรัฐบาล</span>
-                        <img src="logo.png" alt="Logo" class="header-logo">
-                    </div>
-                </div>
-
-                <div class="draw-date"><span id="display-draw-date"></span></div>
-                
-                <div class="result-section" style="margin-top: 10px;">
-                    <div class="prize-title">รางวัลที่ 1</div>
-                </div>
-
-                <div id="first-prize-display" class="number-group" style="margin-top: 5px;"></div>
-                
-                <!-- แก้ไขส่วนนี้ให้แสดงเลขหน้า 3 ตัวและเลขท้าย 3 ตัวในแนวนอนแบบใหม่ -->
-                <div class="result-section horizontal-prize-groups">
-                    <div class="three-digit-prize-group">
-                        <p class="prize-label-blue">เลขหน้า 3 ตัว</p>
-                        <div class="horizontal-numbers">
-                            <div id="display-front-three-1" class="number-group"></div>
-                            <div id="display-front-three-2" class="number-group"></div>
-                        </div>
-                    </div>
-                    <div class="three-digit-prize-group">
-                        <p class="prize-label-green">เลขท้าย 3 ตัว</p>
-                        <div class="horizontal-numbers">
-                            <div id="display-back-three-1" class="number-group"></div>
-                            <div id="display-back-three-2" class="number-group"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="result-section" style="margin-top: 15px;">
-                    <p class="prize-label-orange">เลขท้าย 2 ตัว</p>
-                    <div id="display-back-two" class="number-group"></div>
-                </div>
-            </div>
-        </div>
-        <div class="popup-controls">
-            <button id="saveThaiAsImageButton" class="popup-button">บันทึกเป็นรูปภาพ</button>
-            <button class="close-popup" onclick="closeThaiPopup()">ปิดหน้าต่างนี้</button>
-        </div>
-    </div>
-</div>
-    
-    <button class="back-button" onclick="window.location.href='https://juckphai.github.io/4/index.html'">กลับสู่หน้าหลัก</button>
-    <footer>&copy; 2025 Juckphai. All Rights Reserved.</footer>
-    
-    <!-- External JavaScript -->
-    <script src="script.js"></script>
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.style.background = '';
+                    }, 200);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
