@@ -1,0 +1,187 @@
+   :root {
+      --primary-color: #1e40af;
+      --secondary-color: #2563eb;
+      --background-color: #f9fafb;
+      --text-color: #222;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e2e8f0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    h2::after {
+      content: "▼";
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    h2.active::after {
+      transform: rotate(180deg);
+    }
+
+    h3 {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+
+    .section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .section-content {
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .section-content.active {
+      max-height: 5000px;
+      opacity: 1;
+    }
+
+    .section-subtitle {
+      color: #64748b;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      display: block;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+    }
+
+    /* สีปุ่มต่างๆ */
+    .color-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .color-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .color-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+    .color-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+    .color-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+    .color-6 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333; }
+    .color-7 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: #333; }
+    .color-8 { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); color: #333; }
+    .color-9 { background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%); color: #333; }
+    .color-10 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: #333; }
+    .color-11 { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #333; }
+    .color-12 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+
+    hr {
+      margin: 1.5rem 0;
+      border: none;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+      
+      h3 {
+        font-size: 1.1rem;
+      }
+      
+      .section {
+        padding: 1rem;
+      }
+      
+      .button-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      
+      h1 {
+        font-size: 1.3rem;
+      }
+      
+      header {
+        padding: 1rem;
+      }
+    }
